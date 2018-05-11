@@ -7,77 +7,102 @@ import controladores.*;
 
 public class TelaVotacao {
 
-    Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 
-    int votosEmBrancoGovernador;
-    int votosNuloGovernador;
-    int votosEmBrancoDeputado;
-    int votosNuloDeputado;
+	int votosEmBrancoGovernador;
+	int votosNuloGovernador;
+	int votosEmBrancoDeputado;
+	int votosNuloDeputado;
 
-    void exibe() {
-        System.out.println("--- Votação ---");
-        System.out.println("Votar       (1)");
-        System.out.println("Encerrar    (2)");
+	void exibe() {
+		System.out.println("--- Votação ---");
+		System.out.println("Votar       (1)");
+		System.out.println("Encerrar    (2)");
 
-        int opcao = sc.nextInt();
-        sc.nextLine();
+		int opcao = sc.nextInt();
+		sc.nextLine();
 
-        switch (opcao) {
-            case 1:
-                votar();
-                break;
-            case 2:
-                mostrarResultados();
-                return;
-            default:
-                System.out.println("Comando não reconhecido");
-                break;
-        }
-        exibe();
-    }
+		switch (opcao) {
+		case 1:
+			votar();
+			break;
+		case 2:
+			mostrarResultados();
+			return;
+		default:
+			System.out.println("Comando não reconhecido");
+			break;
+		}
+		exibe();
+	}
 
-    private void votar() {
-        System.out.println("Digite a cidade em que você deseja: ");
-        String nomeCidade = sc.nextLine();
+	private void votar() {
+		System.out.println("Digite a cidade em que você deseja: ");
+		String nomeCidade = sc.nextLine();
 
-        Cidade cidade = ControladorCidade.getInstance().getCidadeByName(nomeCidade);
+		Cidade cidade = ControladorCidade.getInstance().getCidadeByName(nomeCidade);
 
-        System.out.println("Digite a zona: ");
-        int zona = sc.nextInt();
+		System.out.println("Digite a zona: ");
+		int zona = sc.nextInt();
 
-        System.out.println("Digite a seção: ");
-        int secao = sc.nextInt();
-        sc.nextLine();
+		System.out.println("Digite a seção: ");
+		int secao = sc.nextInt();
+		sc.nextLine();
 
-        Urna urna = ControladorUrna.getInstance().getUrna(cidade, zona, secao);
+		Urna urna = ControladorUrna.getInstance().getUrna(cidade, zona, secao);
 
-        if (urna == null) {
-            System.out.println("Erro: urna não encontrada");
-            return;
-        }
-        //Votação governador
-        System.out.println("Urna encontrada! Digite o número do seu candidato para governador:");
-        int numeroGovernador = sc.nextInt();
-        Candidato governador = ControladorCandidato.getInstance().getCandidato(numeroGovernador, Cargo.GOVERNADOR);
-        urna.votarEmGovernador(numeroGovernador, governador);
+		if (urna == null) {
+			System.out.println("Erro: urna não encontrada");
+			return;
+		}
+		// Votação governador
+		System.out.println("Urna encontrada! Digite o número do seu candidato para governador:");
+		int numeroGovernador = sc.nextInt();
+		Candidato governador = ControladorCandidato.getInstance().getCandidato(numeroGovernador, Cargo.GOVERNADOR);
+		urna.votarEmGovernador(numeroGovernador, governador);
 
-        //Votação deputado
-        System.out.println("Digite o número do seu candidato para deputado:");
-        int numeroDeputado = sc.nextInt();
-        Candidato deputado = ControladorCandidato.getInstance().getCandidato(numeroDeputado, Cargo.DEPUTADO);
-        urna.votarEmDeputado(numeroDeputado, deputado);
+		// Votação deputado
+		System.out.println("Digite o número do seu candidato para deputado:");
+		int numeroDeputado = sc.nextInt();
+		Candidato deputado = ControladorCandidato.getInstance().getCandidato(numeroDeputado, Cargo.DEPUTADO);
+		urna.votarEmDeputado(numeroDeputado, deputado);
 
-        sc.nextLine();
-        System.out.println("Votação concluída com sucesso!");
-    }
+		sc.nextLine();
+		System.out.println("Votação concluída com sucesso!");
+	}
 
-    private void mostrarResultados() {
-        for (Cidade cidade : ControladorCidade.getInstance().cidades){
-            for (Urna urna : ControladorUrna.getInstance().getUrnasByCidade(cidade)){
-                urna.apuraResultados();
-            }            
-        }
-        
-    }
+	private void mostrarResultados() {
+		
+	    int votosEmBrancoGovernador = 0;
+	    int votosNuloGovernador = 0;
+	    int votosEmBrancoDeputado = 0;
+	    int votosNuloDeputado = 0;
+		for (Urna urna : ControladorUrna.getInstance().urnas) {
+			urna.apuraResultados();
+			votosEmBrancoDeputado   += urna.votosEmBrancoDeputado;
+			votosNuloDeputado       += urna.votosNuloDeputado;
+		}
+	    int votosValidos = votosEmBrancoGovernador + votosEmBrancoDeputado + votosNuloGovernador + votosNuloDeputado;
+
+		for (Candidato candidato : ControladorCandidato.getInstance().candidatos) {
+			System.out.println("Candidato " + candidato.nome + " recebeu " + candidato.votos + " votos." );	
+		}
+		for (Partido partido : ControladorPartido.getInstance().partidos) {
+			votosValidos += partido.votos;
+		}
+		
+		int quocienteEleitoral = (int)Math.round(votosValidos / 3.0);
+		
+		Candidato governadorEleito = ControladorCandidato.getInstance().getGovernadorEleito();
+		ArrayList<Candidato> deputadosEleitos = ControladorCandidato.getInstance().getDeputadosEleitos();
+		
+		System.out.println(governadorEleito.nome + " foi eleito como governador!");
+		
+		for (Candidato deputadoEleito : deputadosEleitos)
+			System.out.println(deputadoEleito.nome + " foi eleito como deputado!");
+		
+		
+
+	}
 
 }

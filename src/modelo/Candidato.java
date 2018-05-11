@@ -15,5 +15,5 @@ public class Candidato {
         this.numero = numero;
         this.partido = partido;
     }
-    
+   
 }

@@ -55,4 +55,34 @@ public class ControladorCandidato extends Controlador{
             .findFirst()
             .orElse(null);
     }
+    
+    public Candidato getGovernadorEleito() {
+        Candidato eleito = null;
+        for (Candidato candidato : candidatos) {
+        	if (candidato.cargo == Cargo.GOVERNADOR && (eleito == null || candidato.votos > eleito.votos)) {
+        		eleito = candidato;
+        	}
+        }
+        return eleito;
+    }
+    
+    public ArrayList<Candidato> getDeputadosEleitos(){
+    	Candidato c1 = null;
+    	Candidato c2 = null;
+    	Candidato c3 = null;
+    	for (Candidato c : candidatos) {
+    		if (c1 == null || c.votos > c1.votos)
+    			c1 = c;
+    		else if (c2 == null || c.votos > c2.votos)
+    			c2 = c;
+    		else if (c3 == null || c.votos > c3.votos)
+    			c3 = c;
+    	}
+    	ArrayList<Candidato> eleitos = new ArrayList<>();
+    	eleitos.add(c1);
+    	eleitos.add(c2);
+    	eleitos.add(c3);
+    	
+    	return eleitos;
+    }
 }

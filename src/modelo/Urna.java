@@ -12,10 +12,10 @@ public class Urna {
     public Cidade cidade;
     public ArrayList<Candidato> votos = new ArrayList<>();
     
-    private int votosEmBrancoGovernador;
-    private int votosNuloGovernador;
-    private int votosEmBrancoDeputado;
-    private int votosNuloDeputado;
+    public int votosEmBrancoGovernador;
+    public int votosNuloGovernador;
+    public int votosEmBrancoDeputado;
+    public int votosNuloDeputado;
 
     public Urna(int secao, int zona, Turno turno, Cidade cidade) {
         this.secao = secao;
@@ -55,19 +55,11 @@ public class Urna {
     }
     
     public void apuraResultados(){
-        System.out.println("Cidade: " + cidade.nome);
-        System.out.println("Zona: " + zona);
-        System.out.println("Seção: " + secao);
-        
         for (Candidato candidato : votos){
             candidato.votos++;
-        }
-        
-        HashSet<Candidato> hs = new HashSet();
-        hs.addAll(votos);
-        
-        for (Candidato candidato : hs){
-            System.out.println("Candidato: " + candidato.nome +", votos: " + candidato.votos);
+
+            if (candidato.cargo == Cargo.DEPUTADO)
+            	candidato.partido.votos++;
         }
     }
 }

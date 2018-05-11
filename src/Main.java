@@ -16,10 +16,13 @@ public class Main {
             ControladorPartido.getInstance().cadastra("Partido dos trabalhadores", "PT");
             ControladorPartido.getInstance().cadastra("Psdasda", "PSDB");
             
-            ControladorCandidato.getInstance().cadastra("Pedro", Cargo.GOVERNADOR, 1, "PT");
-            ControladorCandidato.getInstance().cadastra("Pedro", Cargo.DEPUTADO, 2, "PT");
-            ControladorCandidato.getInstance().cadastra("Pedro", Cargo.GOVERNADOR, 3, "PSDB");
-            ControladorCandidato.getInstance().cadastra("Pedro", Cargo.DEPUTADO, 4, "PSDB");
+            ControladorCandidato.getInstance().cadastra("Pedro", Cargo.GOVERNADOR, 1, "PT").votos = 10;
+            ControladorCandidato.getInstance().cadastra("Maria", Cargo.GOVERNADOR, 3, "PSDB").votos = 15;
+            ControladorCandidato.getInstance().cadastra("José", Cargo.DEPUTADO, 2, "PT").votos = 3;
+            ControladorCandidato.getInstance().cadastra("Deus", Cargo.DEPUTADO, 4, "PSDB").votos = 6;
+            ControladorCandidato.getInstance().cadastra("A", Cargo.DEPUTADO, 5, "PSDB").votos = 10;
+            ControladorCandidato.getInstance().cadastra("B", Cargo.DEPUTADO, 6, "PSDB").votos = 0;
+            ControladorCandidato.getInstance().cadastra("C", Cargo.DEPUTADO, 7, "PSDB").votos = 50;
             
             ControladorUrna.getInstance().cadastra(1, 1, Turno.SEGUNDO, "Sao Jose");
             ControladorUrna.getInstance().cadastra(1, 2, Turno.SEGUNDO, "Sao Jose");
