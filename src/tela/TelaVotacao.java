@@ -94,7 +94,7 @@ public class TelaVotacao extends Tela {
 		// Retorna governador eleito
 		Candidato governadorEleito = ControladorCandidato.getInstance().getGovernadorEleito();
 		// Retorna os 3 deputados eleitos
-		List<Candidato> deputadosEleitos = ControladorCandidato.getInstance().getDeputadosEleitos(3);
+		List<Candidato> deputadosEleitos = ControladorCandidato.getInstance().getDeputadosEleitos();
 
 		System.out.println(
 				governadorEleito.nome + " foi eleito como governador com " + governadorEleito.votos + " votos!");
