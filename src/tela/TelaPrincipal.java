@@ -3,7 +3,7 @@ package tela;
 import interfaces.*;
 import java.util.*;
 
-public class TelaPrincipal {
+public class TelaPrincipal extends Tela {
     
     public void exibe() {
         System.out.println(" ---- Tela Princial ----");
@@ -15,9 +15,7 @@ public class TelaPrincipal {
         System.out.println("Iniciar votação       (6)");
         System.out.println("Sair                  (7)");
 
-        Scanner sc = new Scanner(System.in);
-        int opcao = sc.nextInt();
-        sc.nextLine();
+        int opcao = getInt();
 
         switch (opcao) {
             case 1:

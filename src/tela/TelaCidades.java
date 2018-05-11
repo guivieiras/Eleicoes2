@@ -3,7 +3,7 @@ package tela;
 import exceptions.*;
 import controladores.*;
 
-public class TelaCidades extends Tela {
+public class TelaCidades extends TelaCadastro {
 
     @Override
     public void exibe(){
@@ -22,18 +22,11 @@ public class TelaCidades extends Tela {
         } catch (CampoVazioException | CadastroRepetidoException ex) {
             System.out.println(ex.getMessage());
         }
-        exibe();
-    }
-
-    @Override
-    public void exibeRemocao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void exibeLista() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     
 }

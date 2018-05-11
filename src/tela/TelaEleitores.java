@@ -3,7 +3,7 @@ package tela;
 import exceptions.*;
 import controladores.*;
 
-public class TelaEleitores extends Tela {
+public class TelaEleitores extends TelaCadastro {
     @Override
     public void exibe(){
         System.out.println("--- Tela Eleitores ---");
@@ -23,12 +23,6 @@ public class TelaEleitores extends Tela {
         } catch (CampoVazioException ex) {
             System.out.println(ex.getMessage());
         }
-        exibe();
-    }
-
-    @Override
-    public void exibeRemocao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

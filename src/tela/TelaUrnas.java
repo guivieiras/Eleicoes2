@@ -1,13 +1,10 @@
 package tela;
 
-import controladores.ControladorUrna;
-import enums.Turno;
-import exceptions.CampoVazioException;
-import exceptions.EntidadeNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import controladores.*;
+import enums.*;
+import exceptions.*;
 
-public class TelaUrnas extends Tela{
+public class TelaUrnas extends TelaCadastro{
     @Override
     public void exibe(){
         System.out.println("--- Tela Urnas ---");
@@ -17,24 +14,18 @@ public class TelaUrnas extends Tela{
     @Override
     public void exibeCadastro() {
         System.out.println("Insira a seção da urna:");
-        int secao = sc.nextInt();
+        int secao = getInt();
         
         System.out.println("Insira a zona da urna:");
-        int zona = sc.nextInt();
-        sc.nextLine();
+        int zona = getInt();
         
         System.out.println("Insira a cidade:");
         String cidade = sc.nextLine();
         
         System.out.println("Primeiro (1) ou segundo (2) turno?");
-        int numeroTurno = sc.nextInt();
-        sc.nextLine();
-        Turno turno;
-        if (numeroTurno == 1)
-            turno = Turno.PRIMEIRO;
-        else if(numeroTurno == 2)
-            turno = Turno.SEGUNDO;
-        else {
+        Turno turno = Turno.getTurno(getInt());
+        
+        if (turno == null) {
             System.out.println("Erro: numero do turno tem que ser 1 ou 2");
             return;
         }
@@ -48,14 +39,7 @@ public class TelaUrnas extends Tela{
     }
 
     @Override
-    public void exibeRemocao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void exibeLista() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
+    } 
 }

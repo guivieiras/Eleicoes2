@@ -3,7 +3,7 @@ package tela;
 import exceptions.*;
 import controladores.*;
 
-public class TelaPartidos extends Tela {
+public class TelaPartidos extends TelaCadastro {
     @Override
     public void exibe(){
         System.out.println("--- Tela Partidos ---");
@@ -23,13 +23,8 @@ public class TelaPartidos extends Tela {
         } catch (CampoVazioException | CadastroRepetidoException ex) {
             System.out.println(ex.getMessage());
         }
-        exibe();
     }
 
-    @Override
-    public void exibeRemocao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void exibeLista() {

@@ -4,7 +4,7 @@ import enums.*;
 import exceptions.*;
 import controladores.*;
 
-public class TelaCandidatos extends Tela {
+public class TelaCandidatos extends TelaCadastro {
 
     @Override
     public void exibe(){
@@ -18,23 +18,17 @@ public class TelaCandidatos extends Tela {
         String nome = sc.nextLine();
         
         System.out.println("Insira o número do candidato: ");
-        int numero = sc.nextInt();
-        sc.nextLine();
-        
-        System.out.println("Governador (G) ou Deputado (D)?");
-        String letraCargo = sc.nextLine();
+        int numero = getInt();           
         
         System.out.println("Insira a sigla do partido: ");
         String siglaPartido = sc.nextLine();
         
-        Cargo cargo;
-        if (letraCargo.equalsIgnoreCase("G"))
-            cargo = Cargo.GOVERNADOR;
-        else if (letraCargo.equalsIgnoreCase("D"))
-            cargo = Cargo.DEPUTADO;
-        else {
+        System.out.println("Governador (G) ou Deputado (D)?");
+        String letraCargo = sc.nextLine();
+        
+        Cargo cargo = Cargo.getCargo(letraCargo);
+        if (cargo == null) {
             System.out.println("Erro: letra inserida diferente de G ou D");
-            exibe();
             return;
         }
         
@@ -44,20 +38,12 @@ public class TelaCandidatos extends Tela {
         } catch (CampoVazioException | EntidadeNotFoundException | CadastroRepetidoException | NumeroInvalidoException ex) {
             System.out.println(ex.getMessage());
         }
-        exibe();    
     }
 
-    @Override
-    public void exibeRemocao() {
+	@Override
+	public void exibeLista() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void exibeLista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
+	}
     
 }
 
