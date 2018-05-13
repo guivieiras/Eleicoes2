@@ -1,7 +1,11 @@
 package tela;
 
 import exceptions.*;
+
+import java.util.ArrayList;
+
 import controladores.*;
+import modelo.*;
 
 public class TelaEleitores extends TelaCadastro {
     @Override
@@ -27,6 +31,15 @@ public class TelaEleitores extends TelaCadastro {
 
     @Override
     public void exibeLista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	ArrayList<Eleitor> eleitores = ControladorEleitor.getInstance().eleitores;
+    	if (eleitores.size() == 0){
+            System.out.println("Não há eleitores cadastrados.");
+            return;
+    	}
+    	
+        System.out.println("Eleitores:");
+        for (Eleitor eleitor : eleitores) {
+        	System.out.println("Nome: " + eleitor.nome + ", Titulo: " + eleitor.titulo);
+        }
     }
 }

@@ -6,7 +6,7 @@ import java.util.*;
 public class TelaPrincipal extends Tela {
     
     public void exibe() {
-        System.out.println(" ---- Tela Princial ----");
+        System.out.println(" ---- Tela Principal ----");
         System.out.println("Cadastrar eleitores   (1)");
         System.out.println("Cadastrar cidades     (2)");
         System.out.println("Cadastrar partidos    (3)");

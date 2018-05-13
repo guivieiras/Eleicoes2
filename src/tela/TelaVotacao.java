@@ -84,12 +84,13 @@ public class TelaVotacao extends Tela {
 		// System.out.println("Candidato " + candidato.nome + " recebeu " +
 		// candidato.votos + " votos." );
 
-		// Soma os votos em deputados dos partidos para os votos válidos
-		for (Partido partido : ControladorPartido.getInstance().partidos)
-			votosValidos += partido.votos;
+		// Soma os votos dos deputados
+		for (Candidato deputado: ControladorCandidato.getInstance().getCandidatos(Cargo.DEPUTADO))
+			votosValidos += deputado.votos;
 
 		// Ver o que fazer com isso
 		int quocienteEleitoral = (int) Math.round(votosValidos / 3.0);
+		System.out.println(quocienteEleitoral);
 
 		// Retorna governador eleito
 		Candidato governadorEleito = ControladorCandidato.getInstance().getGovernadorEleito();

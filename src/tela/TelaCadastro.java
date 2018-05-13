@@ -7,7 +7,8 @@ public abstract class TelaCadastro extends Tela {
     @Override
     public void exibe() {
         System.out.println("Cadastrar   (1)");
-        System.out.println("Sair        (2)");
+        System.out.println("Listar      (2)");
+        System.out.println("Sair        (3)");
 
         int opcao = getInt();
         
@@ -16,6 +17,9 @@ public abstract class TelaCadastro extends Tela {
                 exibeCadastro();
                 break;
             case 2:
+            	exibeLista();
+                break;
+            case 3:
                 return;
             default:
                 System.out.println("Comando não reconhecido, tente novamente.");
